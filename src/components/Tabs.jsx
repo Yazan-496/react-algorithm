@@ -9,13 +9,13 @@ const Tabs = () => {
         {
             id: 1,
             tabTitle: 'Find Largest, smallest, middle numbers algorithm',
-            title: 'Numbers algorithm',
+            title: 'Numbers Algorithm',
             content: <ArrayComponent />
         },
         {
             id: 2,
             tabTitle: 'Check if there are two characters repeated in a word algorithm',
-            title: 'Title 2',
+            title: 'Chars Algorithm',
             content: <CharComponent />
         }
     ];

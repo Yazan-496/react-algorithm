@@ -66,7 +66,8 @@ const ArrayComponent = () => {
             }}>
                 <label>Enter count of numbers</label>
                 <input style={{
-                    width: '25%'
+                    width: '25%',
+                    textAlign: 'center'
                 }} type="number" className="type" onChange={(e) => setLengthNums(e.target.value)}
                        placeholder="Ex: 99"/>
             </div>
