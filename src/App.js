@@ -4,7 +4,7 @@ import Tabs from './components/Tabs';
 function App() {
   return (
     <div>
-      <h1 className="">REACT simple tabs</h1>
+      <h1 className="">React Algorithms</h1>
       <Tabs/>
       <footer></footer>
     </div>
