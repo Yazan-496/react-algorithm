@@ -26,7 +26,11 @@ const ArrayComponent = () => {
     const [largest, setLargest] = useState(null)
     const [smallest, setSmallest] = useState(null)
     const [middle, setMiddle] = useState(null)
+    const [secondMiddle, setSecondMiddle] = useState(null)
     const _generateRandom = () => {
+        setMiddle(null)
+        setSecondMiddle(null)
+        setSmallest(null)
         setLargest(null)
         let Random = []
         for (let i = 0; i < lengthNums; i++) {
@@ -42,16 +46,28 @@ const ArrayComponent = () => {
         const lengthArr = sorted.length
         setLargest(sorted[0])
         setSmallest(sorted[lengthArr - 1])
-        lengthArr % 2 === 1 ? setMiddle(sorted[(lengthArr - 1) / 2]) : setMiddle(sorted[(lengthArr - 1) / 2])
+       if( lengthArr % 2 === 1 ){
+           setMiddle(sorted[(lengthArr - 1) / 2])
+       }  else {
+           setSecondMiddle(sorted[(lengthArr - 2) / 2])
+           setMiddle(sorted[(lengthArr) / 2])
+       }
+
     }
     useEffect(() => {
         // console.log(arrayNumbers, "arrayNumbers")
     }, [arrayNumbers])
     return (
         <div>
-            <div className="text-center">
-                <label>count of numbers</label>
-                <input type="number" className="type" onChange={(e) => setLengthNums(e.target.value)}
+            <div className="text-center" style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
+            }}>
+                <label>Enter count of numbers</label>
+                <input style={{
+                    width: '25%'
+                }} type="number" className="type" onChange={(e) => setLengthNums(e.target.value)}
                        placeholder="Ex: 99"/>
             </div>
             <div className="text-center">
@@ -81,7 +97,7 @@ const ArrayComponent = () => {
                             <b>Smallest number is: {smallest}</b>
                         </Card.Text>
                         <Card.Text>
-                            <b> Middle number is: {middle}</b>
+                            <b> Middle number is: {middle} {`,` + secondMiddle ? secondMiddle : "000"}</b>
                         </Card.Text>
                         <Button onClick={() => {
                             setArrayNumbers([])
