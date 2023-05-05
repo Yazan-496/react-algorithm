@@ -4,14 +4,13 @@
 /node_modules
 /.pnp
 .pnp.js
-/react-algorithm
-react-algorithm/
 
 # testing
 /coverage
 
 # production
 /build
+/android
 
 # misc
 .DS_Store
