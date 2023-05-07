@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import styled from "styled-components"
 import Card from 'react-bootstrap/Card'
 import Table from 'react-bootstrap/Table';
@@ -15,6 +15,7 @@ const Input = styled.input`
 const Button = styled.button`
   background-color: ${props => props.$primary ? "palevioletred" : props.$danger ? "#894242" : "yellowgreen"};
   color: white;
+  width: 40% !important;
   font-size: 20px;
   border: none;
   padding: 10px 60px;
@@ -26,11 +27,10 @@ const CharComponent = () => {
     const [statement, setStatement] = useState(null)
     const [show, setShow] = useState(false)
     let [chars, setChars] = useState([])
-    let [Object, setObject] = useState([])
-    let [arrayRe, setArrayRe] = useState([])
+    const [finalArr, setFinalArr] = useState([])
 
     function findChar(str) {
-        let longest = '';
+        let longest = [];
         let chunk = '';
         for (let i = 0; i < str?.length; i++) {
             if (i === 0) {
@@ -45,14 +45,17 @@ const CharComponent = () => {
                 if (str[i] !== str[i - 1]) {
                     chunk = str[i];
                 }
-                if (chunk?.length > longest?.length) {
-                    longest = chunk;
+                if (longest?.map((one) => chunk?.length > one.length)) {
+                    // longest = chunk;
+                    longest = [...longest, chunk];
                 }
             }
         }
-        if (longest?.length > 1) {
-            return {char: longest, long: longest?.length, word: str}
-        }
+        return longest.map((one) => {
+            if (one.length > 1) {
+                return {char: one, long: one?.length, word: str}
+            }
+        })
     }
 
     function hasRepeatedLetters(str) {
@@ -64,13 +67,14 @@ const CharComponent = () => {
         if (words?.length > 0) {
             words.map((one) => {
                 const res = findChar(one)
-                if (res !== undefined) {
-                    console.log(chars, "chars")
-                    chars = [...chars, res]
-                }
+                let ee = res.map((one) => {
+                    if (one !== undefined) {
+                        chars = [...chars, one]
+                        return one
+                    }
+                })
             })
         }
-
     }
 
     function clearInput() {
@@ -81,17 +85,56 @@ const CharComponent = () => {
     }
 
     function _getResult() {
-        chars.map((one) => {
-            return {word: one.word, char: one.char, long: one.long, id: one.id}
-        })
+        return (
+            <Card>
+                <Card.Title>
+                    <div>Result</div>
+                </Card.Title>
+                <Card.Body>
+                    <Card.Text>
+                        <div style={{
+                            display: "flex", alignContent: 'center',
+                            justifyContent: 'center'
+                        }}>
+                            <Table striped bordered hover>
+                                <thead>
+                                <tr>
+                                    <th>word</th>
+                                    <th>char</th>
+                                    <th>long</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {finalArr.map((one, i) => {
+                                    return (<tr key={i}>
+                                            <td>
+                                                {one.word}
+                                            </td>
+                                            <td>
+                                                {one.char}
+                                            </td>
+                                            <td>
+                                                {one.long}
+                                            </td>
+                                        </tr>
+                                    )
+                                })}
+                                </tbody>
+                            </Table>
+                        </div>
+                    </Card.Text>
+                </Card.Body>
+            </Card>)
     }
 
     useEffect(() => {
-        // console.log(chars, "chars")
-        // console.log(arrayRe, "arrayRe")
-    }, [chars])
-    return (
+        hasRepeatedLetters(statement)
+        return () => {
+            setFinalArr(chars)
+        }
 
+    }, [statement, finalArr])
+    return (
         <div>
             <div className="text-center" style={{
                 display: 'flex',
@@ -106,59 +149,19 @@ const CharComponent = () => {
                        placeholder="Ex: hi AA"/>
             </div>
             <div className="text-center">
-                <Button disabled={statement === null} $primary onClick={
-                    hasRepeatedLetters(statement)
-                }>Find repeated
+                <Button disabled={statement === null} $primary onClick={() => setShow(true)}>Find repeated
                     chars</Button>
             </div>
+            <div className="text-center">
+                <Button onClick={() => {
+                    setChars([])
+                    setStatement(null)
+                    setShow(false)
+                    clearInput()
+                }} $danger>Reset</Button>
+            </div>
             <footer>
-                {statement && <Card style={{width: '18rem'}}>
-                    <Card.Title>
-                        <div>Result</div>
-                    </Card.Title>
-                    <Card.Body>
-                        <Card.Text>
-                            <div style={{
-                                display: "flex", alignContent: 'center',
-                                justifyContent: 'center'
-                            }}>
-                            <Table striped bordered hover>
-                                <thead>
-                                <tr>
-                                    <th>word</th>
-                                    <th>char</th>
-                                    <th>long</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {chars.map((one, i) => {
-                                    return (<tr key={i}>
-                                            <td>
-                                               {one.word}
-                                            </td>
-                                            <td>
-                                                {one.char}
-                                            </td>
-                                            <td>
-                                                {one.long}
-                                            </td>
-                                        </tr>
-                                    )
-                                })}
-                                </tbody>
-                            </Table>
-                            </div>
-                        </Card.Text>
-                        <Button onClick={() => {
-                            setChars([])
-                            setStatement(null)
-                            setShow(false)
-                            setObject([])
-                            setArrayRe([])
-                            clearInput()
-                        }} $danger>Reset</Button>
-                    </Card.Body>
-                </Card>}
+                {show && _getResult()}
             </footer>
         </div>
     )

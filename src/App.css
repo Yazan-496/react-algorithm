@@ -3,7 +3,13 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+tr{
+    width: max-content;
+}
+.card{
+    width: max-content;
+    min-width: 35rem !important;
+}
 body {
     background-color: black !important;
     font-family: 'Roboto', sans-serif;
