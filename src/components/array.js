@@ -39,19 +39,33 @@ const ArrayComponent = () => {
         }
         setArrayNumbers(Random)
     }
+
+    const bubbleSort = () => {
+        for (let i = 0; i < lengthNums; i++) {
+            for (let j = i + 1; j < lengthNums; j++) {
+                if (arrayNumbers[i] < arrayNumbers[j]) {
+                    let x = arrayNumbers[i]
+                    arrayNumbers[i] = arrayNumbers[j]
+                    arrayNumbers[j] = x
+                }
+            }
+        }
+        return arrayNumbers
+    }
     const _calculateNumbers = () => {
-        const sorted = arrayNumbers.sort((a, b) =>
-            a > b ? -1 : 1)
+        // const sorted = arrayNumbers.sort((a, b) =>
+        //     a > b ? -1 : 1)
+        const sorted = bubbleSort(arrayNumbers)
         setArrayNumbers(sorted)
         const lengthArr = sorted.length
         setLargest(sorted[0])
         setSmallest(sorted[lengthArr - 1])
-       if( lengthArr % 2 === 1 ){
-           setMiddle(sorted[(lengthArr - 1) / 2])
-       }  else {
-           setSecondMiddle(sorted[(lengthArr - 2) / 2])
-           setMiddle(sorted[(lengthArr) / 2])
-       }
+        if (lengthArr % 2 === 1) {
+            setMiddle(sorted[(lengthArr - 1) / 2])
+        } else {
+            setSecondMiddle(sorted[(lengthArr - 2) / 2])
+            setMiddle(sorted[(lengthArr) / 2])
+        }
 
     }
     useEffect(() => {

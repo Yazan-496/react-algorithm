@@ -16,7 +16,7 @@ const Tabs = () => {
             id: 2,
             tabTitle: 'Check if there are two characters repeated in a word algorithm',
             title: 'Chars Algorithm',
-            content: <CharComponent />
+            content: <ArrayComponent />
         }
     ];
 
