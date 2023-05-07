@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components"
 import Card from 'react-bootstrap/Card'
+import Table from 'react-bootstrap/Table';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Input = styled.input`
   padding: 0.5em;
@@ -22,47 +24,72 @@ const Button = styled.button`
 `;
 const CharComponent = () => {
     const [statement, setStatement] = useState(null)
-    let [Result, setResult] = useState(null)
+    const [show, setShow] = useState(false)
+    let [chars, setChars] = useState([])
+    let [Object, setObject] = useState([])
+    let [arrayRe, setArrayRe] = useState([])
 
-    function hasRepeatedLetters(str, n) {
-        let rep = false;
-        let seq = false;
-        const result = [];
-
-        const num = '0123456789';
-        const abc = 'abcdefghijklmnopqrstuvqxyz';
-
-        if (str?.length < n) return false;
-
-        for (let i = 0; i < str.length; i++) {
-            if (i + n > str.length) break;
-
-            const chunk = str.slice(i, i + n);
-            const seqABC = abc.indexOf(chunk) > -1;
-            const seq123 = num.indexOf(chunk) > -1;
-
-            if (seq123 || seqABC) {
-                seq = true;
-                result.push(chunk);
+    function findChar(str) {
+        let longest = '';
+        let chunk = '';
+        for (let i = 0; i < str?.length; i++) {
+            if (i === 0) {
+                if (str[i] === str[i + 1]) {
+                    chunk += str[i];
+                }
             }
-
-            if ([...chunk].every(v => v.toLowerCase() === chunk[0].toLowerCase())) {
-                rep = true;
-                result.push(chunk);
+            if (i > 0) {
+                if (str[i] === str[i - 1]) {
+                    chunk += str[i];
+                }
+                if (str[i] !== str[i - 1]) {
+                    chunk = str[i];
+                }
+                if (chunk?.length > longest?.length) {
+                    longest = chunk;
+                }
             }
         }
+        if (longest?.length > 1) {
+            return {char: longest, long: longest?.length, word: str}
+        }
+    }
 
-        return {
-            repetition: rep,
-            sequential: seq,
-            out: result
-        };
+    function hasRepeatedLetters(str) {
+        const words = str?.split(" ");
+        for (let i = 0; i < words?.length - 1; i++) {
+            words[i] += " ";
+        }
+        // console.log(words, "words")
+        if (words?.length > 0) {
+            words.map((one) => {
+                const res = findChar(one)
+                if (res !== undefined) {
+                    console.log(chars, "chars")
+                    chars = [...chars, res]
+                }
+            })
+        }
 
     }
 
+    function clearInput() {
+        const getValue = document.getElementById("inputText");
+        if (getValue.value !== "") {
+            getValue.value = "";
+        }
+    }
+
+    function _getResult() {
+        chars.map((one) => {
+            return {word: one.word, char: one.char, long: one.long, id: one.id}
+        })
+    }
+
     useEffect(() => {
-        console.log(Result, "result")
-    }, [Result])
+        // console.log(chars, "chars")
+        // console.log(arrayRe, "arrayRe")
+    }, [chars])
     return (
 
         <div>
@@ -72,27 +99,63 @@ const CharComponent = () => {
                 alignItems: 'center'
             }}>
                 <label>Enter Your Statement</label>
-                <input style={{
-                    width: '75%',
+                <Input style={{
+                    width: '40%',
                     textAlign: 'center'
-                }} type="text" className="type" onChange={(e) => setStatement(e.target.value)}
+                }} type="text" id="inputText" className="type" onChange={(e) => setStatement(e.target.value)}
                        placeholder="Ex: hi AA"/>
             </div>
             <div className="text-center">
-                <Button disabled={statement === null} $primary onClick={hasRepeatedLetters(statement, 3)}>Find repeated
+                <Button disabled={statement === null} $primary onClick={
+                    hasRepeatedLetters(statement)
+                }>Find repeated
                     chars</Button>
             </div>
             <footer>
                 {statement && <Card style={{width: '18rem'}}>
-                    <Card.Title><b>Result</b></Card.Title>
+                    <Card.Title>
+                        <div>Result</div>
+                    </Card.Title>
                     <Card.Body>
                         <Card.Text>
-                            <b>{Result}</b>
+                            <div style={{
+                                display: "flex", alignContent: 'center',
+                                justifyContent: 'center'
+                            }}>
+                            <Table striped bordered hover>
+                                <thead>
+                                <tr>
+                                    <th>word</th>
+                                    <th>char</th>
+                                    <th>long</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {chars.map((one, i) => {
+                                    return (<tr key={i}>
+                                            <td>
+                                               {one.word}
+                                            </td>
+                                            <td>
+                                                {one.char}
+                                            </td>
+                                            <td>
+                                                {one.long}
+                                            </td>
+                                        </tr>
+                                    )
+                                })}
+                                </tbody>
+                            </Table>
+                            </div>
                         </Card.Text>
                         <Button onClick={() => {
-                            setResult(null)
-                            Result = null
+                            setChars([])
                             setStatement(null)
+                            setShow(false)
+                            setObject([])
+                            setArrayRe([])
+                            clearInput()
                         }} $danger>Reset</Button>
                     </Card.Body>
                 </Card>}

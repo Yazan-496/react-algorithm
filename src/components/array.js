@@ -68,6 +68,13 @@ const ArrayComponent = () => {
         }
 
     }
+
+    function clearInput() {
+        const getValue = document.getElementById("inputText");
+        if (getValue.value !== "") {
+            getValue.value = "";
+        }
+    }
     useEffect(() => {
         // console.log(arrayNumbers, "arrayNumbers")
     }, [arrayNumbers])
@@ -82,7 +89,7 @@ const ArrayComponent = () => {
                 <input style={{
                     width: '25%',
                     textAlign: 'center'
-                }} type="number" className="type" onChange={(e) => setLengthNums(e.target.value)}
+                }}  id="inputText" type="number" className="type" onChange={(e) => setLengthNums(e.target.value)}
                        placeholder="Ex: 99"/>
             </div>
             <div className="text-center">
@@ -117,6 +124,7 @@ const ArrayComponent = () => {
                         <Button onClick={() => {
                             setArrayNumbers([])
                             setLargest(null)
+                            clearInput()
                         }} $danger>Reset</Button>
                     </Card.Body>
                 </Card>}
