@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7326527d-50a2-4b27-a3b9-40bf1ea6b9b0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/array.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/array.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chars.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/chars.js" afterDir="false" />
-    </list>
+    <list default="true" id="7326527d-50a2-4b27-a3b9-40bf1ea6b9b0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,7 +40,7 @@
       <option name="presentableId" value="Default" />
       <updated>1683457747117</updated>
       <workItem from="1683457749021" duration="17103000" />
-      <workItem from="1683650272363" duration="6974000" />
+      <workItem from="1683650272363" duration="7115000" />
     </task>
     <task id="LOCAL-00001" summary="- fix algorithm">
       <created>1683458632417</created>
@@ -74,7 +70,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683478543144</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add merge sort">
+      <created>1683660063500</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1683660063500</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -97,6 +100,7 @@
     <MESSAGE value="- fix ignore" />
     <MESSAGE value="- chars algorithm" />
     <MESSAGE value="- chars algorithm multi&#10;- fix some styles" />
-    <option name="LAST_COMMIT_MESSAGE" value="- chars algorithm multi&#10;- fix some styles" />
+    <MESSAGE value="add merge sort" />
+    <option name="LAST_COMMIT_MESSAGE" value="add merge sort" />
   </component>
 </project>

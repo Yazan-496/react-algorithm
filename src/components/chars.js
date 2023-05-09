@@ -15,7 +15,6 @@ const Input = styled.input`
 const Button = styled.button`
   background-color: ${props => props.$primary ? "palevioletred" : props.$danger ? "#894242" : "yellowgreen"};
   color: white;
-  width: 40% !important;
   font-size: 20px;
   border: none;
   padding: 10px 60px;
