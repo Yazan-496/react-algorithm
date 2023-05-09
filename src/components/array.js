@@ -52,12 +52,79 @@ const ArrayComponent = () => {
         }
         return arrayNumbers
     }
+    const mergeSort = (inputArray, leftIndex, midIndex, rightIndex) => {
+        let j;
+        let i;
+        const n1 = midIndex - leftIndex + 1;
+        const n2 = rightIndex - midIndex;
+
+        // Create temp arrays
+        const LeftArray = new Array(n1);
+        const RightArray = new Array(n2);
+
+        // Copy data to temp arrays L[] and R[]
+        for (i = 0; i < n1; i++)
+            LeftArray[i] = inputArray[leftIndex + i];
+        for (j = 0; j < n2; j++)
+            RightArray[j] = inputArray[midIndex + 1 + j];
+
+        // Merge the temp arrays back into arr[l..r]
+
+        // Initial index of first subarray
+        i = 0;
+
+        // Initial index of second subarray
+        j = 0;
+
+        // Initial index of merged subarray
+        let k = leftIndex;
+
+        while (i < n1 && j < n2) {
+            if (LeftArray[i] >= RightArray[j]) {
+                inputArray[k] = LeftArray[i];
+                i++;
+            } else {
+                inputArray[k] = RightArray[j];
+                j++;
+            }
+            k++;
+        }
+
+        // Copy the remaining elements of
+        // L[], if there are any
+        while (i < n1) {
+            inputArray[k] = LeftArray[i];
+            i++;
+            k++;
+        }
+
+        // Copy the remaining elements of
+        // R[], if there are any
+        while (j < n2) {
+            inputArray[k] = RightArray[j];
+            j++;
+            k++;
+        }
+    }
+
+    const mergeFun = (inputArray, leftHalf, rightHalf) => {
+        if (leftHalf >= rightHalf) {
+            return;//returns recursively
+        }
+        const midIndex = leftHalf + parseInt((rightHalf - leftHalf) / 2);
+        mergeFun(inputArray, leftHalf, midIndex);
+        mergeFun(inputArray, midIndex + 1, rightHalf);
+        mergeSort(inputArray, leftHalf, midIndex, rightHalf);
+        return inputArray;
+    }
+
     const _calculateNumbers = () => {
         // const sorted = arrayNumbers.sort((a, b) =>
         //     a > b ? -1 : 1)
-        const sorted = bubbleSort(arrayNumbers)
+        // const sorted = bubbleSort(arrayNumbers)
+        const sorted = mergeFun(arrayNumbers, 0, arrayNumbers.length - 1);
         setArrayNumbers(sorted)
-        const lengthArr = sorted.length
+        const lengthArr = sorted?.length
         setLargest(sorted[0])
         setSmallest(sorted[lengthArr - 1])
         if (lengthArr % 2 === 1) {
@@ -75,6 +142,7 @@ const ArrayComponent = () => {
             getValue.value = "";
         }
     }
+
     useEffect(() => {
         // console.log(arrayNumbers, "arrayNumbers")
     }, [arrayNumbers])
@@ -89,16 +157,16 @@ const ArrayComponent = () => {
                 <input style={{
                     width: '25%',
                     textAlign: 'center'
-                }}  id="inputText" type="number" className="type" onChange={(e) => setLengthNums(e.target.value)}
+                }} id="inputText" type="number" className="type" onChange={(e) => setLengthNums(e.target.value)}
                        placeholder="Ex: 99"/>
             </div>
             <div className="text-center">
                 <Button disabled={lengthNums === null} $primary onClick={_generateRandom}>Generate</Button>
             </div>
             <div className="text-center">
-                <Button disabled={arrayNumbers.length === 0} onClick={_calculateNumbers}>Calculate</Button>
+                <Button disabled={arrayNumbers?.length === 0} onClick={_calculateNumbers}>Calculate</Button>
             </div>
-            <div>{arrayNumbers.length > 0 && arrayNumbers.map((num, ind) => {
+            <div>{arrayNumbers?.length > 0 && arrayNumbers.map((num, ind) => {
                 return (
                     <Input className="input" inputColor={largest ? "91b191" : ""} backColor={largest ? "91b191" : ""}
                            key={ind} type="number" onChange={(e) => {
