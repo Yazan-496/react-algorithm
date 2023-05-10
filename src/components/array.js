@@ -58,25 +58,15 @@ const ArrayComponent = () => {
         const n1 = midIndex - leftIndex + 1;
         const n2 = rightIndex - midIndex;
 
-        // Create temp arrays
         const LeftArray = new Array(n1);
         const RightArray = new Array(n2);
 
-        // Copy data to temp arrays L[] and R[]
         for (i = 0; i < n1; i++)
             LeftArray[i] = inputArray[leftIndex + i];
         for (j = 0; j < n2; j++)
             RightArray[j] = inputArray[midIndex + 1 + j];
-
-        // Merge the temp arrays back into arr[l..r]
-
-        // Initial index of first subarray
         i = 0;
-
-        // Initial index of second subarray
         j = 0;
-
-        // Initial index of merged subarray
         let k = leftIndex;
 
         while (i < n1 && j < n2) {
@@ -89,17 +79,11 @@ const ArrayComponent = () => {
             }
             k++;
         }
-
-        // Copy the remaining elements of
-        // L[], if there are any
         while (i < n1) {
             inputArray[k] = LeftArray[i];
             i++;
             k++;
         }
-
-        // Copy the remaining elements of
-        // R[], if there are any
         while (j < n2) {
             inputArray[k] = RightArray[j];
             j++;
@@ -109,7 +93,7 @@ const ArrayComponent = () => {
 
     const mergeFun = (inputArray, leftHalf, rightHalf) => {
         if (leftHalf >= rightHalf) {
-            return;//returns recursively
+            return;
         }
         const midIndex = leftHalf + parseInt((rightHalf - leftHalf) / 2);
         mergeFun(inputArray, leftHalf, midIndex);

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7326527d-50a2-4b27-a3b9-40bf1ea6b9b0" name="Default Changelist" comment="" />
+    <list default="true" id="7326527d-50a2-4b27-a3b9-40bf1ea6b9b0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/array.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/array.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,7 +45,8 @@
       <option name="presentableId" value="Default" />
       <updated>1683457747117</updated>
       <workItem from="1683457749021" duration="17103000" />
-      <workItem from="1683650272363" duration="7115000" />
+      <workItem from="1683650272363" duration="7672000" />
+      <workItem from="1683693044280" duration="1152000" />
     </task>
     <task id="LOCAL-00001" summary="- fix algorithm">
       <created>1683458632417</created>
@@ -77,7 +83,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683660063500</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix button styles">
+      <created>1683660172720</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1683660172720</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,6 +114,7 @@
     <MESSAGE value="- chars algorithm" />
     <MESSAGE value="- chars algorithm multi&#10;- fix some styles" />
     <MESSAGE value="add merge sort" />
-    <option name="LAST_COMMIT_MESSAGE" value="add merge sort" />
+    <MESSAGE value="fix button styles" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix button styles" />
   </component>
 </project>
